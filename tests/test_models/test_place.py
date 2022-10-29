@@ -135,7 +135,8 @@ class TestPlace_instantiation(unittest.TestCase):
         dt = datetime.today()
         dt_iso = dt.isoformat()
         pl = Place(id="345", created_at=dt_iso, updated_at=dt_iso)
-        self.assertEqual(pl.id, "345")        self.assertEqual(pl.created_at, dt)
+        self.assertEqual(pl.id, "345")
+        self.assertEqual(pl.created_at, dt)
         self.assertEqual(pl.updated_at, dt)
 
     def test_instantiation_with_None_kwargs(self):

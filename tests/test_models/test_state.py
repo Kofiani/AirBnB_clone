@@ -20,9 +20,9 @@ class TestState_instantiation(unittest.TestCase):
     def test_no_args_instantiates(self):
         self.assertEqual(State, type(State()))
 
-    def test_new_instance_stored_in_objects(self)
-
+    def test_new_instance_stored_in_objects(self):
         self.assertIn(State(), models.storage.all().values())
+
     def test_id_is_public_str(self):
         self.assertEqual(str, type(State().id))
 
@@ -117,7 +117,8 @@ class TestState_save(unittest.TestCase):
         st = State()
         sleep(0.05)
         first_updated_at = st.updated_at
-        st.save()        second_updated_at = st.updated_at
+        st.save()
+        second_updated_at = st.updated_at
         self.assertLess(first_updated_at, second_updated_at)
         sleep(0.05)
         st.save()
@@ -129,7 +130,7 @@ class TestState_save(unittest.TestCase):
             st.save(None)
 
 
-    def test_save_updates_file(self)
+    def test_save_updates_file(self):
         st = State()
         st.save()
         stid = "State." + st.id
@@ -163,9 +164,9 @@ class TestState_to_dict(unittest.TestCase):
 
     def test_to_dict_datetime_attributes_are_strs(self):
         st = State()
-        st_dict = st.to_dict(
+        st_dict = st.to_dict()
         self.assertEqual(str, type(st_dict["id"]))
-        self.assertEqual(str, type(st_dict["created_at"])
+        self.assertEqual(str, type(st_dict["created_at"]))
 
         self.assertEqual(str, type(st_dict["updated_at"]))
 

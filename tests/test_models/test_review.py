@@ -58,7 +58,7 @@ class TestReview_instantiation(unittest.TestCase):
     def test_two_reviews_different_created_at(self):
         rv1 = Review()
         sleep(0.05)
-        rv2 = Review(
+        rv2 = Review()
         self.assertLess(rv1.created_at, rv2.created_at)
     def test_two_reviews_different_updated_at(self):
         rv1 = Review()
@@ -66,7 +66,7 @@ class TestReview_instantiation(unittest.TestCase):
         rv2 = Review()
         self.assertLess(rv1.updated_at, rv2.updated_at)
 
-    def test_str_representation(self)
+    def test_str_representation(self):
         dt = datetime.today()
         dt_repr = repr(dt)
         rv = Review()
