@@ -1,12 +1,13 @@
 #!/usr/bin/python3
-''' This is the base model for the airbnb clone project'''
+'''This is the base model for the airbnb clone project'''
 
 import uuid
 from datetime import datetime
 
 
 class BaseModel:
-    
+    '''The Base Model from which all all objects
+        are instantiated'''
     created_at = datetime.today()
     updated_at = datetime.today()
 
@@ -24,7 +25,6 @@ class BaseModel:
                         setattr(self, key, datetime.fromisoformat(kwargs[key]))
                     else:
                         setattr(self, key, kwargs[key])
-            
 
     def save(self):
         from models import storage
@@ -34,9 +34,10 @@ class BaseModel:
     def to_dict(self):
         self.created_at = self.created_at.isoformat()
         self.updated_at = self.updated_at.isoformat()
-        add_class_key = dict(__class__ = self.__class__.__name__)
+        add_class_key = dict(__class__=self.__class__.__name__)
         add_class_key.update(self.__dict__)
         return add_class_key
 
     def __str__(self):
-        return '[' + self.__class__.__name__ + ']' + '(' + self.id + ')' + repr(self.__dict__)
+        return '[' + self.__class__.__name__ + ']' +\
+                '(' + self.id + ')' + repr(self.__dict__)
