@@ -27,7 +27,7 @@ class BaseModel:
         else:
             for key in kwargs:
                 if key != "__class__":
-                    if key == 'created_at' or key == 'updated_at':
+                    if key in ('created_at', 'updated_at'):
                         setattr(self, key, datetime.fromisoformat(kwargs[key]))
                     else:
                         setattr(self, key, kwargs[key])
@@ -49,11 +49,13 @@ class BaseModel:
         Create a new key called __class__.
         The new key will be used to create a new object deserializing with JSON.
         """
-        self.created_at = self.created_at.isoformat()
-        self.updated_at = self.updated_at.isoformat()
-        add_class_key = dict(__class__=self.__class__.__name__)
-        add_class_key.update(self.__dict__)
-        return add_class_key
+        copy_dict = self.__dict__.copy()
+        copy_dict["__class__"] = self.__class__.__name__
+        for key, value in self.__dict__.items():
+            if key in ("created_at", "updated_at"):
+                value = self.__dict__[key].isoformat()
+                copy_dict[key] = value
+        return copy_dict
 
     def __str__(self):
         """Create a string representation of the object."""
