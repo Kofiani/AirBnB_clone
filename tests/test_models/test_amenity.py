@@ -53,7 +53,7 @@ class TestAmenity_instantiation(unittest.TestCase):
         am1 = Amenity()
         sleep(0.05)
         am2 = Amenity()
-        self.assertLess(am1.updated_at, am2.updated_at
+        self.assertLess(am1.updated_at, am2.updated_at)
 
     def test_str_representation(self):
         dt = datetime.today()
@@ -105,8 +105,7 @@ class TestAmenity_save(unittest.TestCase):
         except IOError:
             pass
 
-    def test_one_saveself):
-
+    def test_one_save(self):
         am = Amenity()
         sleep(0.05)
         first_updated_at = am.updated_at
@@ -124,10 +123,10 @@ class TestAmenity_save(unittest.TestCase):
 
         self.assertLess(first_updated_at, second_updated_at)
         sleep(0.05)
-        am.save(
+        am.save()
 
         self.assertLess(second_updated_at, am.updated_at)
-
+        
     def test_save_with_arg(self):
         am = Amenity()
         with self.assertRaises(TypeError):
@@ -153,7 +152,7 @@ class TestAmenity_to_dict(unittest.TestCase):
         self.assertIn("id", am.to_dict())
         self.assertIn("created_at", am.to_dict())
         self.assertIn("updated_at", am.to_dict())
-        self.assertIn("__class__", am.to_dict()
+        self.assertIn("__class__", am.to_dict())
 
     def test_to_dict_contains_added_attributes(self):
         am = Amenity()

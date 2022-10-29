@@ -54,9 +54,10 @@ class TestCity_instantiation(unittest.TestCase):
         cy2 = City()
         self.assertLess(cy1.created_at, cy2.created_at)
 
-    def test_two_cities_different_updated_at(self)
+    def test_two_cities_different_updated_at(self):
         cy1 = City()
-        sleep(0.05)        cy2 = City()
+        sleep(0.05)
+        cy2 = City()
         self.assertLess(cy1.updated_at, cy2.updated_at)
 
     def test_str_representation(self):
@@ -92,7 +93,7 @@ class TestCity_save(unittest.TestCase):
     """Unittests for testing save method of the City class."""
 
     @classmethod
-    def setUp(self)
+    def setUp(self):
         try:
             os.rename("file.json", "tmp")
         except IOError:
@@ -128,7 +129,7 @@ class TestCity_save(unittest.TestCase):
 
     def test_save_with_arg(self):
         cy = City()
-        with self.assertRaises(TypeError)
+        with self.assertRaises(TypeError):
             cy.save(None)
 
     def test_save_updates_file(self):
