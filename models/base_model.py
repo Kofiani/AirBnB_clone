@@ -47,7 +47,8 @@ class BaseModel:
 
         Convert the data dictionary to be serialized with JSON.
         Create a new key called __class__.
-        The new key will be used to create a new object deserializing with JSON.
+        The new key will be used to create a
+        new object deserializing with JSON.
         """
         copy_dict = self.__dict__.copy()
         copy_dict["__class__"] = self.__class__.__name__
@@ -60,4 +61,4 @@ class BaseModel:
     def __str__(self):
         """Create a string representation of the object."""
         return '[' + self.__class__.__name__ + ']' +\
-                '(' + self.id + ')' + repr(self.__dict__)
+            '(' + self.id + ')' + repr(self.__dict__)

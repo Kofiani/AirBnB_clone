@@ -147,7 +147,6 @@ class TestPlace_instantiation(unittest.TestCase):
 class TestPlace_save(unittest.TestCase):
     """Unittests for testing save method of the Place class."""
 
-
     @classmethod
     def setUp(self):
         try:
@@ -168,7 +167,7 @@ class TestPlace_save(unittest.TestCase):
     def test_one_save(self):
         pl = Place()
         sleep(0.05)
-        first_upated_at = pl.updated_at
+        first_updated_at = pl.updated_at
 
         pl.save()
         self.assertLess(first_updated_at, pl.updated_at)

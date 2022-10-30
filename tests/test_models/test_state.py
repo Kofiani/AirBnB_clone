@@ -84,7 +84,6 @@ class TestState_instantiation(unittest.TestCase):
             State(id=None, created_at=None, updated_at=None)
 
 
-
 class TestState_save(unittest.TestCase):
     """Unittests for testing save method of the State class."""
 
@@ -129,7 +128,6 @@ class TestState_save(unittest.TestCase):
         with self.assertRaises(TypeError):
             st.save(None)
 
-
     def test_save_updates_file(self):
         st = State()
         st.save()
@@ -138,13 +136,11 @@ class TestState_save(unittest.TestCase):
             self.assertIn(stid, f.read())
 
 
-
 class TestState_to_dict(unittest.TestCase):
     """Unittests for testing to_dict method of the State class."""
 
     def test_to_dict_type(self):
         self.assertTrue(dict, type(State().to_dict()))
-
 
     def test_to_dict_contains_correct_keys(self):
 

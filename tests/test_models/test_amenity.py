@@ -22,7 +22,6 @@ class TestAmenity_instantiation(unittest.TestCase):
     def test_new_instance_stored_in_objects(self):
         self.assertIn(Amenity(), models.storage.all().values())
 
-
     def test_id_is_public_str(self):
         self.assertEqual(str, type(Amenity().id))
 
@@ -126,7 +125,7 @@ class TestAmenity_save(unittest.TestCase):
         am.save()
 
         self.assertLess(second_updated_at, am.updated_at)
-        
+
     def test_save_with_arg(self):
         am = Amenity()
         with self.assertRaises(TypeError):
@@ -142,7 +141,6 @@ class TestAmenity_save(unittest.TestCase):
 
 class TestAmenity_to_dict(unittest.TestCase):
     """Unittests for testing to_dict method of the Amenity class."""
-
 
     def test_to_dict_type(self):
         self.assertTrue(dict, type(Amenity().to_dict()))

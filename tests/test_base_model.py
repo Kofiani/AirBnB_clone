@@ -101,7 +101,8 @@ class TestBaseModel(unittest.TestCase):
         self.assertEqual(len(b.to_dict()), len(partial_expectation) + 1)
 
     def test_when_kwargs_passed_is_empty(self):
-        """Checks that id, created_at and updated_at are automatically generated if they're not in kwargs."""
+        """Checks that id, created_at and updated_at are automatically
+        generated if they're not in kwargs."""
         my_dict = {}
         b = BaseModel(**my_dict)
         self.assertTrue(type(b.id) is str)
@@ -109,7 +110,8 @@ class TestBaseModel(unittest.TestCase):
         self.assertTrue(type(b.updated_at) is datetime)
 
     def test_when_kwargs_passed_is_not_empty(self):
-        """Checks that id, created_at and updated_at are created from kwargs."""
+        """Checks that id, created_at and updated_at
+        are created from kwargs."""
         my_dict = {"id": uuid4(), "created_at": datetime.utcnow().isoformat(),
                    "updated_at": datetime.utcnow().isoformat()}
         b = BaseModel(**my_dict)
@@ -131,7 +133,8 @@ class TestBaseModel(unittest.TestCase):
         self.assertEqual(b.name, "Firdaus")
 
     def test_when_kwargs_passed_is_more_than_default(self):
-        """Checks BaseModel does not break when kwargs contains more than the default attributes."""
+        """Checks BaseModel does not break when kwargs contains more than the
+        default attributes."""
         my_dict = {"id": uuid4(), "created_at": datetime.utcnow().isoformat(),
                    "updated_at": datetime.utcnow().isoformat(),
                    "name": "Firdaus"}
@@ -139,7 +142,8 @@ class TestBaseModel(unittest.TestCase):
         self.assertTrue(hasattr(b, "name"))
 
     def test_new_method_not_called_when_dict_obj_is_passed_to_BaseModel(self):
-        """Test that storage.new() is not called when a BaseModel obj is created from a dict object."""
+        """Test that storage.new() is not called when a BaseModel obj is
+        created from a dict object."""
         my_dict = {"id": uuid4(), "created_at": datetime.utcnow().isoformat(),
                    "updated_at": datetime.utcnow().isoformat(),
                    "name": "Firdaus"}
@@ -212,7 +216,8 @@ class TestBaseModel(unittest.TestCase):
         self.assertDictEqual(test_dict, b.to_dict())
 
     def test_to_dict_with_args(self):
-        """Checks that TypeError is returned when argument is passed to to_dict()."""
+        """Checks that TypeError is returned when argument is passed
+        to to_dict()."""
         b = BaseModel()
         with self.assertRaises(TypeError):
             b.to_dict(None)

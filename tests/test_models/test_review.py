@@ -20,7 +20,8 @@ class TestReview_instantiation(unittest.TestCase):
     def test_no_args_instantiates(self):
         self.assertEqual(Review, type(Review()))
 
-    def test_new_instance_stored_in_objects(self):        self.assertIn(Review(), models.storage.all().values())
+    def test_new_instance_stored_in_objects(self):
+        self.assertIn(Review(), models.storage.all().values())
 
     def test_id_is_public_str(self):
         self.assertEqual(str, type(Review().id))
@@ -43,7 +44,6 @@ class TestReview_instantiation(unittest.TestCase):
         self.assertIn("user_id", dir(rv))
         self.assertNotIn("user_id", rv.__dict__)
 
-
     def test_text_is_public_class_attribute(self):
         rv = Review()
         self.assertEqual(str, type(Review.text))
@@ -60,6 +60,7 @@ class TestReview_instantiation(unittest.TestCase):
         sleep(0.05)
         rv2 = Review()
         self.assertLess(rv1.created_at, rv2.created_at)
+
     def test_two_reviews_different_updated_at(self):
         rv1 = Review()
         sleep(0.05)
@@ -99,8 +100,7 @@ class TestReview_instantiation(unittest.TestCase):
 class TestReview_save(unittest.TestCase):
     """Unittests for testing save method of the Review class."""
 
-    @classmetho
-
+    @classmethod
     def setUp(self):
         try:
             os.rename("file.json", "tmp")
