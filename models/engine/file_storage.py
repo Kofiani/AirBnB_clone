@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-
+"""This is the engine that powers the backend."""
 import json
 from models.base_model import BaseModel
 from models.user import User
@@ -11,38 +11,51 @@ from models.review import Review
 
 
 class FileStorage:
-    """Represent an abstracted storage engine.
-    Attributes:
-        __file_path [str]: The name of the file to save objects to.
-        __objects [dict]: A dictionary of instantiated objects.
-    """
-    __file_path = "file.json"
+    """Save file instance to JSON."""
+
+    __file_path = 'file.json'
     __objects = {}
 
     def all(self):
-        """Return the dictionary __objects."""
-        return FileStorage.__objects
+        """Return the address of all the saved instances."""
+        return self.__objects
 
     def new(self, obj):
-        """Set in __objects obj with key <obj_class_name>.id"""
-        ocname = obj.__class__.__name__
-        FileStorage.__objects["{}.{}".format(ocname, obj.id)] = obj
+        """Add new object to file.
+
+        store the address of a new instance from base_model
+        create a new instance caling self.reload().
+        """
+        create_key = obj.__class__.__name__ + '.' + obj.id
+        self.__objects[create_key] = obj
 
     def save(self):
-        """Serialize __objects to the JSON file __file_path."""
-        odict = FileStorage.__objects
-        objdict = {obj: odict[obj].to_dict() for obj in odict.keys()}
-        with open(FileStorage.__file_path, "w") as f:
-            json.dump(objdict, f)
+        """Save the data to file.
+
+        To successfully save to file, the values must be
+        converted to a dictionary
+        __objects already have keys but needs the values to be
+        converted into a new dictionary so we do not tamper
+        the current data dictionary.
+        """
+        with open(self.__file_path, "w") as new_file:
+            convert_obj_to_dict = {}
+            for key, value in self.__objects.items():
+                convert_obj_to_dict[key] = value.to_dict()
+            json.dump(convert_obj_to_dict, new_file)
 
     def reload(self):
-        """Deserialize the JSON file __file_path to __objects, if it exists."""
+        """Reload data file.
+
+        read data from file and create a new BaseModel instance.
+        pass each data to create new instance.
+        The value of each key is a dictionary.
+        BaseModel(**obj)
+        """
         try:
-            with open(FileStorage.__file_path) as f:
-                objdict = json.load(f)
-                for o in objdict.values():
-                    cls_name = o["__class__"]
-                    del o["__class__"]
-                    self.new(eval(cls_name)(**o))
+            with open(self.__file_path) as json_file:
+                from_json = json.load(json_file)
+                for obj in from_json.values():
+                    self.new(eval(obj['__class__'])(**obj))
         except FileNotFoundError:
             return

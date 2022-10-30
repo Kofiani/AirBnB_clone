@@ -20,11 +20,10 @@ def parse(arg):
     if curly_braces is None:
         if brackets is None:
             return [i.strip(",") for i in split(arg)]
-        else
-
+        else:
             lexer = split(arg[:bracketsspan()[0]])
 
-            retl = [i.strip(",") for i i lexer]
+            retl = [i.strip(",") for i in lexer]
 
             retl.append(brackets.group())
             return retl
@@ -111,14 +110,13 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
         elif argl[0] not in HBNBCommand.__classes:
             print("** class doesn't exist **")
-        elif len(argl) == 1
+        elif len(argl) == 1:
 
             print("** instance id missing **")
         elif "{}.{}".format(argl[0], argl[1]) not in objdict:
             print("** no instance found **")
         else:
             print(objdict["{}.{}".format(argl[0], argl[1])])
-
 
     def do_destroy(self, arg):
         """Usage: destroy <class> <id> or <class>.destroy(<id>)
@@ -163,7 +161,6 @@ class HBNBCommand(cmd.Cmd):
                 count += 1
         print(count)
 
-
     def do_update(self, arg):
         """Usage: update <class> <id> <attribute_name> <attribute_value> or
        <class>.update(<id>, <attribute_name>, <attribute_value>) or
@@ -175,7 +172,7 @@ class HBNBCommand(cmd.Cmd):
 
         objdict = storage.all()
 
-        if len(argl) == 0
+        if len(argl) == 0:
 
             print("** class name missing **")
             return False
@@ -190,7 +187,7 @@ class HBNBCommand(cmd.Cmd):
             print("** no instance found **")
             return Fals
 
-        if len(argl) == 2
+        if len(argl) == 2:
 
             print("** attribute name missing **")
             return False
@@ -203,7 +200,7 @@ class HBNBCommand(cmd.Cmd):
                 return False
 
         if len(argl) == 4:
-            obj = objdict["{}.{}".format(argl[0], argl[])]
+            obj = objdict["{}.{}".format(argl[0], argl[1])]
 
             if argl[2] in obj.__class__.__dict__.keys():
                 valtype = type(obj.__class__.__dict__[argl[2]])
